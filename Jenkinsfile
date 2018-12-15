@@ -1,12 +1,18 @@
 pipeline {
+    agent any
     stages {
         stage('Build'){
-            sh './gradlew build'
+            steps {
+                sh './gradlew build'
+            }
         }
         stage('Spin up Container'){
             agent { dockerfile{
                 additionalBuildArgs '-p 8081:8081'
             } }
+            steps{
+                sh 'echo Spinning up Docker container'
+            }
 
         }
 
