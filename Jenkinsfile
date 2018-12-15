@@ -8,14 +8,9 @@ pipeline {
             }
         }
         stage('Spin up Container'){
-            agent {
-                dockerfile {
-                    label'app-template'
-
-                }
-            }
 
             steps{
+                sh 'docker build -t app-template'
                 sh 'docker run -p 8081:8081 -rm app-template'
                 sh 'docker stop app-template'
             }
