@@ -11,8 +11,8 @@ pipeline {
 
             steps{
                 sh 'docker build -t app-template .'
-                sh 'docker run -p 8081:8081 -rm app-template'
-                sh 'docker stop app-template'
+                sh 'docker run --name template -d -p 8081:8081 --rm app-template:latest'
+                sh 'docker stop template'
             }
 
         }
