@@ -8,11 +8,16 @@ pipeline {
             }
         }
         stage('Spin up Container'){
-            agent { dockerfile{
-                additionalBuildArgs '-p 8081:8081'
-            } }
+            agent {
+                dockerfile {
+                    label'app-template'
+
+                }
+            }
+
             steps{
-                sh 'echo Spinning up Docker container'
+                sh 'docker run -p 8081:8081 -rm app-template'
+                sh 'docker stop app-template'
             }
 
         }
